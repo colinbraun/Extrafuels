@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "normal": [
+      { "model": "charcoalmod:charcoalBlock" },
+      { "model": "charcoalmod:charcoalBlock", "y": 90 },
+      { "model": "charcoalmod:charcoalBlock", "y": 180 },
+      { "model": "charcoalmod:charcoalBlock", "y": 270 }
+    ]
+  }
+}

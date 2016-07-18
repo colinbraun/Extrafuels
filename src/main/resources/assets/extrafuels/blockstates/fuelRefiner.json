@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "normal": [
+      { "model": "extrafuels:fuelRefiner" },
+      { "model": "extrafuels:fuelRefiner", "y": 90 },
+      { "model": "extrafuels:fuelRefiner", "y": 180 },
+      { "model": "extrafuels:fuelRefiner", "y": 270 }
+    ]
+  }
+}
