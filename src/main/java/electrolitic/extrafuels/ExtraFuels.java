@@ -2,6 +2,7 @@ package electrolitic.extrafuels;
 
 import handlers.RecipeHandler;
 import handlers.Reference;
+import handlers.RegistryHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -17,7 +18,7 @@ public class ExtraFuels {
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
-
+        RegistryHandler.register();
     }
 
     @Mod.EventHandler
