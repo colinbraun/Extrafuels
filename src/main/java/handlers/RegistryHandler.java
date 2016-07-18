@@ -1,6 +1,6 @@
 package handlers;
 
-import electrolitic.extrafuels.init.tile.TileEntityCoalRefiner;
+import electrolitic.extrafuels.init.tile.TileEntityFuelRefiner;
 import electrolitic.extrafuels.util.BlockRegister;
 import electrolitic.extrafuels.util.Instances;
 import net.minecraft.block.Block;
@@ -13,7 +13,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 public class RegistryHandler {
 
     public static void register(){
-        GameRegistry.register(GameRegistry.register(Instances.BLOCK_COAL_REFINER).createItemBlock());
-        GameRegistry.registerTileEntity(TileEntityCoalRefiner.class, "tileCoalRefiner");
+        GameRegistry.register(GameRegistry.register(Instances.BLOCK_FUEL_REFINER).createItemBlock());
+        GameRegistry.registerTileEntity(TileEntityFuelRefiner.class, "blockFuelRefiner");
     }
 }

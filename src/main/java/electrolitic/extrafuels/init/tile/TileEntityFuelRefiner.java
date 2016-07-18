@@ -8,7 +8,7 @@ import net.minecraftforge.items.ItemStackHandler;
 /**
  * Created by Colin on 7/17/2016.
  */
-public class TileEntityCoalRefiner extends TileEntity implements ITickable{
+public class TileEntityFuelRefiner extends TileEntity implements ITickable{
 
 
     private int progress;
@@ -17,7 +17,7 @@ public class TileEntityCoalRefiner extends TileEntity implements ITickable{
 
     public final ItemStackHandler itemStackHandler = new ItemStackHandler(contents);
 
-    public TileEntityCoalRefiner()
+    public TileEntityFuelRefiner()
     {
 
     }
