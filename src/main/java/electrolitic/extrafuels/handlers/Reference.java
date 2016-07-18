@@ -1,4 +1,4 @@
-package handlers;
+package electrolitic.extrafuels.handlers;
 
 /**
  * Created by Colin on 6/17/2016.

@@ -1,10 +1,10 @@
 package electrolitic.extrafuels;
 
 import electrolitic.extrafuels.proxy.IProxy;
-import handlers.GuiHandler;
-import handlers.RecipeHandler;
-import handlers.Reference;
-import handlers.RegistryHandler;
+import electrolitic.extrafuels.handlers.GuiHandler;
+import electrolitic.extrafuels.handlers.RecipeHandler;
+import electrolitic.extrafuels.handlers.Reference;
+import electrolitic.extrafuels.handlers.RegistryHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;

@@ -1,10 +1,9 @@
-package handlers;
+package electrolitic.extrafuels.handlers;
 
 import electrolitic.extrafuels.guis.containers.GuiContainerFuelRefiner;
 import electrolitic.extrafuels.guis.screens.GuiFuelRefiner;
 import electrolitic.extrafuels.init.tile.TileEntityFuelRefiner;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;

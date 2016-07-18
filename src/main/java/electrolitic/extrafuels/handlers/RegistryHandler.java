@@ -1,10 +1,7 @@
-package handlers;
+package electrolitic.extrafuels.handlers;
 
 import electrolitic.extrafuels.init.tile.TileEntityFuelRefiner;
-import electrolitic.extrafuels.util.BlockRegister;
 import electrolitic.extrafuels.util.Instances;
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 /**

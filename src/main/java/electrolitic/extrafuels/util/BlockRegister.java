@@ -1,6 +1,6 @@
 package electrolitic.extrafuels.util;
 
-import handlers.Reference;
+import electrolitic.extrafuels.handlers.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemBlock;

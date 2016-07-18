@@ -2,7 +2,7 @@ package electrolitic.extrafuels.guis.screens;
 
 import electrolitic.extrafuels.guis.containers.GuiContainerFuelRefiner;
 import electrolitic.extrafuels.init.tile.TileEntityFuelRefiner;
-import handlers.Reference;
+import electrolitic.extrafuels.handlers.Reference;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.InventoryPlayer;
