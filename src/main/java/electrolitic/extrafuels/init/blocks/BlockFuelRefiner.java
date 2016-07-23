@@ -30,17 +30,18 @@ public class BlockFuelRefiner extends BlockRegister {
 
     @Override
     public TileEntity createTileEntity(World world, IBlockState state) {
-        return super.createTileEntity(world, state);
+        return new TileEntityFuelRefiner();
     }
 
     @Override
     public boolean hasTileEntity(IBlockState state) {
-        return super.hasTileEntity(state);
+        return true;
     }
 
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, @Nullable ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
         TileEntity tileEntity = worldIn.getTileEntity(pos);
+
 
         if(!(tileEntity instanceof TileEntityFuelRefiner || playerIn.isSneaking()))
             return false;

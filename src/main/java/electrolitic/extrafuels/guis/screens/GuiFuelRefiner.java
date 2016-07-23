@@ -11,7 +11,7 @@ import net.minecraft.util.ResourceLocation;
 /**
  * Created by Colin on 7/16/2016.
  */
-public class GuiFuelRefiner extends GuiContainer{
+public class GuiFuelRefiner extends GuiContainer {
 
     private TileEntityFuelRefiner tile;
     private ResourceLocation guiTextureLocation = new ResourceLocation(Reference.MODID, "textures/gui/fuelRefiner.png");

@@ -18,6 +18,7 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 @Mod(modid = Reference.MODID, name = Reference.NAME, version = Reference.VERSION)
 public class ExtraFuels {
 
+    @Mod.Instance
     public static ExtraFuels instance;
 
     @SidedProxy(clientSide=Reference.CLIENT_PROXY, serverSide=Reference.COMMON_PROXY, modId=Reference.MODID)
