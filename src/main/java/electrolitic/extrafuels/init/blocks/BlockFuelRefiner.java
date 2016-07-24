@@ -62,8 +62,10 @@ public class BlockFuelRefiner extends BlockRegister {
             if (!worldIn.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 7, false).isCreative()) {
                 spawnAsEntity(worldIn, pos, new ItemStack(Instances.BLOCK_FUEL_REFINER));
             }
-            spawnAsEntity(worldIn, pos, tileEntity.itemStackHandler.getStackInSlot(0));
-            spawnAsEntity(worldIn, pos, tileEntity.itemStackHandler.getStackInSlot(1));
+            if(tileEntity.containsItemInSlot(0))
+                spawnAsEntity(worldIn, pos, tileEntity.itemStackHandler.getStackInSlot(0));
+            if(tileEntity.containsItemInSlot(1))
+                spawnAsEntity(worldIn, pos, tileEntity.itemStackHandler.getStackInSlot(1));
         }
     }
 

@@ -97,4 +97,5 @@ public class GuiContainerFuelRefiner extends Container{
         }
         return null;
     }
+
 }

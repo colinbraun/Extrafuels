@@ -14,6 +14,7 @@ public class ClientProxy implements IProxy{
     @Override
     public void preInit() {
         loadModels(Instances.BLOCK_FUEL_REFINER);
+        loadModels(Instances.ITEM_REFINED_COAL);
     }
 
     @Override

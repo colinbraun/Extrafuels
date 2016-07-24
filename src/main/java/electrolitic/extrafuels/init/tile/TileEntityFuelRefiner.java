@@ -1,6 +1,7 @@
 package electrolitic.extrafuels.init.tile;
 
 import com.sun.istack.internal.NotNull;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -11,6 +12,8 @@ import net.minecraftforge.items.ItemStackHandler;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 /**
  * Created by Colin on 7/17/2016.
@@ -45,11 +48,10 @@ public class TileEntityFuelRefiner extends TileEntity implements ITickable{
         }
         else
         {
-            if(!(itemStackHandler.getStackInSlot(1).stackSize < 64 &&
-                    validItemsMap.get(itemStackHandler.getStackInSlot(0).getItem()) == itemStackHandler.getStackInSlot(1).getItem()))
+            if((itemStackHandler.getStackInSlot(1).stackSize >= 64 ||
+                    validItemsMap.get(itemStackHandler.getStackInSlot(0).getItem()) != itemStackHandler.getStackInSlot(1).getItem()))
                 return;
         }
-
 
         //Now we know it's safe to start processing
         progress++;
@@ -110,9 +112,11 @@ public class TileEntityFuelRefiner extends TileEntity implements ITickable{
 
     public static boolean isValidInput(Item item)
     {
-        for(int i = 0; i < validItemsMap.size(); i++)
+        Iterator iterator = validItemsMap.entrySet().iterator();
+        while(iterator.hasNext())
         {
-            if(validItemsMap.get(item) == validItemsMap.get(i))
+            Map.Entry pair = (Map.Entry) iterator.next();
+            if(pair.getValue() == validItemsMap.get(item))
                 return true;
         }
         return false;
@@ -122,8 +126,7 @@ public class TileEntityFuelRefiner extends TileEntity implements ITickable{
     {
         itemStackHandler.getStackInSlot(0).stackSize--;
         if(itemStackHandler.getStackInSlot(1) == null) {
-            ItemStack temp = itemStackHandler.getStackInSlot(0).copy();
-            temp.stackSize = 1;
+            ItemStack temp = new ItemStack((Item)validItemsMap.get(itemStackHandler.getStackInSlot(0)), 1);
             itemStackHandler.setStackInSlot(1, temp);
         }
         else
@@ -135,5 +138,10 @@ public class TileEntityFuelRefiner extends TileEntity implements ITickable{
     public static void addValidItemToMap(Item itemIn, Item itemOut)
     {
         validItemsMap.put(itemIn, itemOut);
+    }
+
+    public boolean containsItemInSlot(int slot)
+    {
+        return itemStackHandler.getStackInSlot(slot) != null;
     }
 }
