@@ -124,15 +124,19 @@ public class TileEntityFuelRefiner extends TileEntity implements ITickable{
 
     private void craftItem()
     {
-        itemStackHandler.getStackInSlot(0).stackSize--;
+        System.out.println("Started crafting item...");
         if(itemStackHandler.getStackInSlot(1) == null) {
-            ItemStack temp = new ItemStack((Item)validItemsMap.get(itemStackHandler.getStackInSlot(0)), 1);
+            ItemStack temp = new ItemStack(validItemsMap.get(itemStackHandler.getStackInSlot(0)));
+            temp.stackSize = 1;
             itemStackHandler.setStackInSlot(1, temp);
         }
         else
             itemStackHandler.getStackInSlot(1).stackSize++;
+        itemStackHandler.getStackInSlot(0).stackSize--;
         if(itemStackHandler.getStackInSlot(0).stackSize <= 0)
             itemStackHandler.setStackInSlot(0, null);
+        if(itemStackHandler.getStackInSlot(1) != null)
+            System.out.println(itemStackHandler.getStackInSlot(1).toString());
     }
 
     public static void addValidItemToMap(Item itemIn, Item itemOut)

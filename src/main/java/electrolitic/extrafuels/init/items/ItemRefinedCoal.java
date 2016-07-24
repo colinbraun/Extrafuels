@@ -12,6 +12,7 @@ public class ItemRefinedCoal extends ItemRegister{
     {
         super("refinedCoal");
         this.setCreativeTab(CreativeTabs.MISC);
+        this.setMaxStackSize(64);
     }
 
 }
