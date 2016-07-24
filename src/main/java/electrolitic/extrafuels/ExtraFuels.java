@@ -1,10 +1,13 @@
 package electrolitic.extrafuels;
 
+import electrolitic.extrafuels.init.tile.TileEntityFuelRefiner;
 import electrolitic.extrafuels.proxy.IProxy;
 import electrolitic.extrafuels.handlers.GuiHandler;
 import electrolitic.extrafuels.handlers.RecipeHandler;
 import electrolitic.extrafuels.handlers.Reference;
 import electrolitic.extrafuels.handlers.RegistryHandler;
+import electrolitic.extrafuels.util.Instances;
+import net.minecraft.init.Items;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -39,6 +42,7 @@ public class ExtraFuels {
     {
         RecipeHandler.registerRecipes();
         NetworkRegistry.INSTANCE.registerGuiHandler(this, guiHandler);
+        TileEntityFuelRefiner.addValidItemToMap(Items.COAL, Instances.ITEM_REFINED_COAL);
     }
 
     @Mod.EventHandler

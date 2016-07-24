@@ -11,7 +11,7 @@ public class ItemRegister extends Item{
     public ItemRegister(String name)
     {
         setRegistryName(new ResourceLocation("extrafuels", name));
-        setUnlocalizedName(getRegistryName().toString());
+        setUnlocalizedName(name);
     }
 
 

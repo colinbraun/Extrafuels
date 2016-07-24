@@ -1,11 +1,12 @@
 package electrolitic.extrafuels.util;
 
 import electrolitic.extrafuels.init.blocks.BlockFuelRefiner;
+import electrolitic.extrafuels.init.items.ItemRefinedCoal;
 
 /**
  * Created by Colin on 7/17/2016.
  */
 public class Instances {
     public static final BlockFuelRefiner BLOCK_FUEL_REFINER = new BlockFuelRefiner();
-
+    public static final ItemRefinedCoal ITEM_REFINED_COAL = new ItemRefinedCoal();
 }
