@@ -148,9 +148,21 @@ public class TileEntityFuelRefiner extends TileEntity implements ITickable{
         return itemStackHandler.getStackInSlot(slot) != null;
     }
 
+    public int[] getFields()
+    {
+        return new int[] {progress, processTime};
+    }
+
+    public void setFields(int id, int value)
+    {
+        if(id == 0)
+            progress = value;
+        if(id == 1 )
+            processTime = value;
+    }
+
     public boolean isRunning()
     {
-        System.out.println(progress);
         return progress > 0;
     }
 }

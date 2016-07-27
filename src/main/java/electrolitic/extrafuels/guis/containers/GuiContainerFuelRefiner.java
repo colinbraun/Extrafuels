@@ -1,16 +1,17 @@
 package electrolitic.extrafuels.guis.containers;
 
+import electrolitic.extrafuels.ExtraFuels;
 import electrolitic.extrafuels.init.tile.TileEntityFuelRefiner;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Items;
-import net.minecraft.inventory.ClickType;
-import net.minecraft.inventory.Container;
-import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.inventory.Slot;
+import net.minecraft.inventory.*;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntityFurnace;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.SlotItemHandler;
 
 import javax.annotation.Nullable;
@@ -22,10 +23,11 @@ import javax.naming.NoInitialContextException;
 public class GuiContainerFuelRefiner extends Container{
 
     private TileEntityFuelRefiner tile;
-
+    private int[] oldFields;
     public GuiContainerFuelRefiner(TileEntityFuelRefiner tileEntity, InventoryPlayer playerInventory)
     {
         tile = tileEntity;
+        oldFields = tileEntity.getFields();
         addSlotToContainer(new SlotItemHandler(tileEntity.itemStackHandler, 0, 56, 34));
         addSlotToContainer(new SlotItemHandler(tileEntity.itemStackHandler, 1, 111, 30));
 
@@ -63,6 +65,32 @@ public class GuiContainerFuelRefiner extends Container{
     @Override
     public void detectAndSendChanges() {
         super.detectAndSendChanges();
+
+        int[] fields = tile.getFields();
+        boolean update = false;
+
+        for(int i = 0; i < this.listeners.size(); ++i)
+        {
+            if(oldFields[i] != fields[i])
+            {
+                update = true;
+                oldFields[i] = fields[i];
+            }
+        }
+        if(update) {
+            System.out.println("An update was needed!");
+            for (int i = 0; i < this.listeners.size(); ++i) {
+                IContainerListener iContainerListener = listeners.get(i);
+                iContainerListener.sendProgressBarUpdate(this, 0, fields[0]);
+                iContainerListener.sendProgressBarUpdate(this, 1, fields[1]);
+            }
+        }
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void updateProgressBar(int id, int data) {
+        this.tile.setFields(id, data);
     }
 
     @Nullable
