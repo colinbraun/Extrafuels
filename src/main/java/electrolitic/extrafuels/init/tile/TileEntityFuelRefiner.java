@@ -25,7 +25,7 @@ public class TileEntityFuelRefiner extends TileEntity implements ITickable{
     private int processTime;
 
     private ItemStack[] contents = new ItemStack[2];
-    public static final HashMap<Item, Item> validItemsMap = new HashMap<Item, Item>();
+    private static final HashMap<Item, Item> validItemsMap = new HashMap<Item, Item>();
 
     public final ItemStackHandler itemStackHandler = new ItemStackHandler(contents);
 
@@ -39,8 +39,10 @@ public class TileEntityFuelRefiner extends TileEntity implements ITickable{
     public void update() {
         if(worldObj.isRemote)
             return;
-        if(itemStackHandler.getStackInSlot(0) == null || itemStackHandler.getStackInSlot(0).stackSize <= 0)
+        if(itemStackHandler.getStackInSlot(0) == null || itemStackHandler.getStackInSlot(0).stackSize <= 0) {
+            progress = 0;
             return;
+        }
         if(!isValidInput(itemStackHandler.getStackInSlot(0).getItem()))
             return;
         if(itemStackHandler.getStackInSlot(1) == null){
@@ -124,9 +126,8 @@ public class TileEntityFuelRefiner extends TileEntity implements ITickable{
 
     private void craftItem()
     {
-        System.out.println("Started crafting item...");
         if(itemStackHandler.getStackInSlot(1) == null) {
-            ItemStack temp = new ItemStack(validItemsMap.get(itemStackHandler.getStackInSlot(0)));
+            ItemStack temp = new ItemStack(validItemsMap.get(itemStackHandler.getStackInSlot(0).getItem()));
             temp.stackSize = 1;
             itemStackHandler.setStackInSlot(1, temp);
         }
@@ -135,8 +136,6 @@ public class TileEntityFuelRefiner extends TileEntity implements ITickable{
         itemStackHandler.getStackInSlot(0).stackSize--;
         if(itemStackHandler.getStackInSlot(0).stackSize <= 0)
             itemStackHandler.setStackInSlot(0, null);
-        if(itemStackHandler.getStackInSlot(1) != null)
-            System.out.println(itemStackHandler.getStackInSlot(1).toString());
     }
 
     public static void addValidItemToMap(Item itemIn, Item itemOut)
@@ -147,5 +146,11 @@ public class TileEntityFuelRefiner extends TileEntity implements ITickable{
     public boolean containsItemInSlot(int slot)
     {
         return itemStackHandler.getStackInSlot(slot) != null;
+    }
+
+    public boolean isRunning()
+    {
+        System.out.println(progress);
+        return progress > 0;
     }
 }
