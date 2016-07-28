@@ -1,21 +1,16 @@
 package electrolitic.extrafuels.guis.containers;
 
-import electrolitic.extrafuels.ExtraFuels;
 import electrolitic.extrafuels.init.tile.TileEntityFuelRefiner;
-import net.minecraft.client.gui.ScaledResolution;
+import electrolitic.extrafuels.guis.slots.FuelRefinerOutputSlot;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.inventory.*;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.SlotItemHandler;
 
 import javax.annotation.Nullable;
-import javax.naming.NoInitialContextException;
 
 /**
  * Created by Colin on 7/16/2016.
@@ -29,7 +24,7 @@ public class GuiContainerFuelRefiner extends Container{
         tile = tileEntity;
         oldFields = tileEntity.getFields();
         addSlotToContainer(new SlotItemHandler(tileEntity.itemStackHandler, 0, 56, 34));
-        addSlotToContainer(new SlotItemHandler(tileEntity.itemStackHandler, 1, 111, 30));
+        addSlotToContainer(new FuelRefinerOutputSlot(tileEntity.itemStackHandler, 1, 111, 30));
 
 
         addPlayerSlotsToContainer(playerInventory);
@@ -69,7 +64,7 @@ public class GuiContainerFuelRefiner extends Container{
         int[] fields = tile.getFields();
         boolean update = false;
 
-        for(int i = 0; i < this.listeners.size(); ++i)
+        for(int i = 0; i < oldFields.length; ++i)
         {
             if(oldFields[i] != fields[i])
             {
@@ -78,7 +73,6 @@ public class GuiContainerFuelRefiner extends Container{
             }
         }
         if(update) {
-            System.out.println("An update was needed!");
             for (int i = 0; i < this.listeners.size(); ++i) {
                 IContainerListener iContainerListener = listeners.get(i);
                 iContainerListener.sendProgressBarUpdate(this, 0, fields[0]);
@@ -90,7 +84,7 @@ public class GuiContainerFuelRefiner extends Container{
     @Override
     @SideOnly(Side.CLIENT)
     public void updateProgressBar(int id, int data) {
-        this.tile.setFields(id, data);
+        tile.setFields(id, data);
     }
 
     @Nullable
@@ -103,12 +97,17 @@ public class GuiContainerFuelRefiner extends Container{
         ItemStack itemStack = slot.getStack().copy(); //The ItemStack in the slot whose index is passed (Usually clicked on)
 
 
-
+        if(index == 1 && inventorySlots.get(index).getStack() != null)
+        {
+            if(mergeItemStack(inventorySlots.get(index).getStack(), 2, inventorySlots.size(), false))
+                return inventorySlots.get(index).getStack();
+            return null;
+        }
         if(inventorySlots.get(0).getStack() == null || inventorySlots.get(0).getStack().stackSize <= 0)/*Checks to see if there is an open slot in the input of the
         fuel refiner. If so, moves the clicked on ItemStack into it */
         {
-            this.inventorySlots.get(0).putStack(itemStack);
-            this.inventorySlots.get(index).putStack(null);
+                this.inventorySlots.get(0).putStack(itemStack);
+                this.inventorySlots.get(index).putStack(null);
         }
         else if(index == 0)//This occurs when the player has shift clicked on the input of the fuel refiner itself
         {

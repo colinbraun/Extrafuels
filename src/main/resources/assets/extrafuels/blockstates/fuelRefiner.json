@@ -1,10 +1,8 @@
 {
   "variants": {
-    "normal": [
-      { "model": "extrafuels:fuelRefiner" },
-      { "model": "extrafuels:fuelRefiner", "y": 90 },
-      { "model": "extrafuels:fuelRefiner", "y": 180 },
-      { "model": "extrafuels:fuelRefiner", "y": 270 }
-    ]
+    "facing=north": { "model": "extrafuels:fuelRefiner" },
+    "facing=south": { "model": "extrafuels:fuelRefiner", "y": 180 },
+    "facing=west":  { "model": "extrafuels:fuelRefiner", "y": 270 },
+    "facing=east":  { "model": "extrafuels:fuelRefiner", "y": 90 }
   }
 }

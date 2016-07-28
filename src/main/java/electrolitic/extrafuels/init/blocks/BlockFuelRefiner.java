@@ -5,8 +5,12 @@ import electrolitic.extrafuels.init.tile.TileEntityFuelRefiner;
 import electrolitic.extrafuels.util.BlockRegister;
 import electrolitic.extrafuels.util.Instances;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.PropertyDirection;
+import net.minecraft.block.properties.PropertyEnum;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -25,11 +29,14 @@ import java.util.HashMap;
  */
 public class BlockFuelRefiner extends BlockRegister {
 
+
+    PropertyEnum<EnumFacing> FACING = PropertyEnum.create("facing", EnumFacing.class);
     public BlockFuelRefiner(){
         super("fuelRefiner", Material.ROCK);
         this.setHardness(10.0f);
         this.setHarvestLevel("pickaxe", 1);
         this.setCreativeTab(CreativeTabs.MISC);
+        this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
     }
 
     @Override
@@ -56,7 +63,6 @@ public class BlockFuelRefiner extends BlockRegister {
 
     @Override
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-
         TileEntityFuelRefiner tileEntity = (TileEntityFuelRefiner) worldIn.getTileEntity(pos);
         if (!worldIn.isRemote) {
             if (!worldIn.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 7, false).isCreative()) {
@@ -67,6 +73,40 @@ public class BlockFuelRefiner extends BlockRegister {
             if(tileEntity.containsItemInSlot(1))
                 spawnAsEntity(worldIn, pos, tileEntity.itemStackHandler.getStackInSlot(1));
         }
+        super.breakBlock(worldIn, pos, state);
     }
 
+    @Override //This occurs just before it's set in the world
+    public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
+        return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
+    }
+
+    @Override
+    protected BlockStateContainer createBlockState() {
+        if(FACING == null)
+            FACING = PropertyEnum.create("facing", EnumFacing.class);
+        return new BlockStateContainer(this, FACING);
+    }
+
+    @Override
+    public int getMetaFromState(IBlockState state) {
+        return state.getValue(FACING).getIndex();
+    }
+
+    @Override
+    public IBlockState getStateFromMeta(int meta) {
+        EnumFacing enumFacing = EnumFacing.getFront(meta);
+
+        if(enumFacing.getAxis() == EnumFacing.Axis.Y)
+        {
+            enumFacing = EnumFacing.NORTH;
+        }
+
+        return this.getDefaultState().withProperty(FACING, enumFacing);
+    }
+
+    public static void setState(boolean active, World worldIn, BlockPos pos)
+    {
+
+    }
 }

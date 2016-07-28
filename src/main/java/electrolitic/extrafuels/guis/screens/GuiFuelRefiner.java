@@ -27,11 +27,9 @@ public class GuiFuelRefiner extends GuiContainer {
         GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
 
         mc.renderEngine.bindTexture(guiTextureLocation);
-        drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
+        drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);//Draws the Gui
         if(tile.isRunning())
             drawTexturedModalRect(guiLeft + 80, guiTop + 38, 176, 18, (int)(23 * (double)tile.getProgress()/tile.getProcessTime()), 6); //Draws the progress bar
-        if(tile.isRunning())
-            System.out.println("The tile is running");
     }
 
 
