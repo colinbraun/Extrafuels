@@ -4,6 +4,7 @@ import electrolitic.extrafuels.ExtraFuels;
 import electrolitic.extrafuels.init.tile.TileEntityFuelRefiner;
 import electrolitic.extrafuels.util.BlockRegister;
 import electrolitic.extrafuels.util.Instances;
+import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.properties.PropertyEnum;
@@ -21,16 +22,13 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
 
 /**
  * Created by Colin on 7/17/2016.
  */
 public class BlockFuelRefiner extends BlockRegister {
-
-
-    PropertyEnum<EnumFacing> FACING = PropertyEnum.create("facing", EnumFacing.class);
+    public static final PropertyEnum<EnumFacing> FACING = PropertyEnum.create("facing", EnumFacing.class, EnumFacing.NORTH, EnumFacing.SOUTH, EnumFacing.EAST, EnumFacing.WEST);
     public BlockFuelRefiner(){
         super("fuelRefiner", Material.ROCK);
         this.setHardness(10.0f);
@@ -83,8 +81,6 @@ public class BlockFuelRefiner extends BlockRegister {
 
     @Override
     protected BlockStateContainer createBlockState() {
-        if(FACING == null)
-            FACING = PropertyEnum.create("facing", EnumFacing.class);
         return new BlockStateContainer(this, FACING);
     }
 

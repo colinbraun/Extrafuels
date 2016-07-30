@@ -11,7 +11,7 @@ public class RegistryHandler {
 
     public static void register(){
         GameRegistry.register(GameRegistry.register(Instances.BLOCK_FUEL_REFINER).createItemBlock());
-        GameRegistry.registerTileEntity(TileEntityFuelRefiner.class, "blockFuelRefiner");
+        GameRegistry.registerTileEntity(TileEntityFuelRefiner.class, Reference.MODID + ":blockFuelRefiner");
         GameRegistry.register(Instances.ITEM_REFINED_COAL);
     }
 }
