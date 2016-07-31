@@ -1,0 +1,16 @@
+[
+{
+  "modid": "extrafuels",
+  "name": "ExtraFuels",
+  "description": "A simple mod made to improve my understanding of modding",
+  "version": "1.0.0",
+  "mcversion": "1.10.2",
+  "url": "https://github.com/electrolitic/Extrafuels",
+  "updateUrl": "",
+  "authorList": ["electrolitic"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]

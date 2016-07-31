@@ -1,16 +1,17 @@
 package electrolitic.extrafuels.init.tile;
 
-import com.sun.istack.internal.NotNull;
-import net.minecraft.init.Items;
+import electrolitic.extrafuels.handlers.itemhandlers.FuelRefinerItemStackHandler;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -18,7 +19,7 @@ import java.util.Map;
 /**
  * Created by Colin on 7/17/2016.
  */
-public class TileEntityFuelRefiner extends TileEntity implements ITickable{
+public class TileEntityFuelRefiner extends TileEntity implements ITickable {
 
 
     private int progress;
@@ -27,8 +28,8 @@ public class TileEntityFuelRefiner extends TileEntity implements ITickable{
     private ItemStack[] contents = new ItemStack[2];
     private static final HashMap<Item, Item> validItemsMap = new HashMap<Item, Item>();
 
+    public final FuelRefinerItemStackHandler fuelRefinerItemStackHandler = new FuelRefinerItemStackHandler(contents);
     public final ItemStackHandler itemStackHandler = new ItemStackHandler(contents);
-
     public TileEntityFuelRefiner()
     {
         processTime = 120;
@@ -165,4 +166,21 @@ public class TileEntityFuelRefiner extends TileEntity implements ITickable{
     {
         return progress > 0;
     }
+
+    @Override
+    public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
+
+        if(capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
+            return true;
+        return super.hasCapability(capability, facing);
+    }
+
+    @Override
+    public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
+        if(capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
+            return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(fuelRefinerItemStackHandler);
+        return super.getCapability(capability, facing);
+    }
+
+
 }

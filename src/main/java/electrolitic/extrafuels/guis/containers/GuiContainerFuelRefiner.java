@@ -97,22 +97,22 @@ public class GuiContainerFuelRefiner extends Container{
         ItemStack itemStack = slot.getStack().copy(); //The ItemStack in the slot whose index is passed (Usually clicked on)
 
 
-        if(index == 1 && inventorySlots.get(index).getStack() != null)
+        if(index == 1 && slot.getStack() != null)
         {
-            if(mergeItemStack(inventorySlots.get(index).getStack(), 2, inventorySlots.size(), false))
-                return inventorySlots.get(index).getStack();
+            if(mergeItemStack(slot.getStack(), 2, inventorySlots.size(), false))
+                return slot.getStack();
             return null;
         }
         if(inventorySlots.get(0).getStack() == null || inventorySlots.get(0).getStack().stackSize <= 0)/*Checks to see if there is an open slot in the input of the
         fuel refiner. If so, moves the clicked on ItemStack into it */
         {
                 this.inventorySlots.get(0).putStack(itemStack);
-                this.inventorySlots.get(index).putStack(null);
+                slot.putStack(null);
         }
         else if(index == 0)//This occurs when the player has shift clicked on the input of the fuel refiner itself
         {
-            if(mergeItemStack(inventorySlots.get(0).getStack(), 2, inventorySlots.size(), false))
-                return inventorySlots.get(0).getStack();
+            if(mergeItemStack(slot.getStack(), 2, inventorySlots.size(), false))
+                return slot.getStack();
         }
         else if(this.inventorySlots.get(0).getStack().getItem() == itemStack.getItem())/*Checks to see if the clicked ItemStack and the one in the input of the
         fuel refiner are the same. If so, it merges them*/
