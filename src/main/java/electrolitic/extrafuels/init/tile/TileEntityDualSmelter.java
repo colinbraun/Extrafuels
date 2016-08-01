@@ -10,11 +10,22 @@ import net.minecraftforge.items.ItemStackHandler;
  */
 public class TileEntityDualSmelter extends TileEntity {
 
+    //The amount of time the item has been cooking for
+    private int progress;
+    //The amount of time it takes to cook the item in the furncae
+    private int totalCookTime;
+    //The amount of burn time left in the furnace
+    private int burnTime;
+    //The amount of burn time the currently burning item had right as it started
+    private int itemTotalBurnTime;
+
     private ItemStack[] contents = new ItemStack[6];
     public final ItemStackHandler itemStackHandler = new ItemStackHandler();
+
     public TileEntityDualSmelter()
     {
-
+        progress = 0;
+        totalCookTime =
     }
 
     @Override
@@ -27,5 +38,8 @@ public class TileEntityDualSmelter extends TileEntity {
         super.readFromNBT(compound);
     }
 
+    public int[] getFields()
+    {
 
+    }
 }

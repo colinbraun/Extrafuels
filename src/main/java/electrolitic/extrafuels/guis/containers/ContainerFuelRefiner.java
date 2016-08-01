@@ -1,7 +1,7 @@
 package electrolitic.extrafuels.guis.containers;
 
 import electrolitic.extrafuels.init.tile.TileEntityFuelRefiner;
-import electrolitic.extrafuels.guis.slots.FuelRefinerOutputSlot;
+import electrolitic.extrafuels.guis.slots.OutputSlot;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.*;
@@ -15,16 +15,16 @@ import javax.annotation.Nullable;
 /**
  * Created by Colin on 7/16/2016.
  */
-public class GuiContainerFuelRefiner extends Container{
+public class ContainerFuelRefiner extends Container{
 
     private TileEntityFuelRefiner tile;
     private int[] oldFields;
-    public GuiContainerFuelRefiner(TileEntityFuelRefiner tileEntity, InventoryPlayer playerInventory)
+    public ContainerFuelRefiner(TileEntityFuelRefiner tileEntity, InventoryPlayer playerInventory)
     {
         tile = tileEntity;
         oldFields = tileEntity.getFields();
         addSlotToContainer(new SlotItemHandler(tileEntity.itemStackHandler, 0, 56, 34));
-        addSlotToContainer(new FuelRefinerOutputSlot(tileEntity.itemStackHandler, 1, 111, 30));
+        addSlotToContainer(new OutputSlot(tileEntity.itemStackHandler, 1, 111, 30));
 
 
         addPlayerSlotsToContainer(playerInventory);

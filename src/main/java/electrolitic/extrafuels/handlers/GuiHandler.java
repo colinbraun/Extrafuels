@@ -1,6 +1,6 @@
 package electrolitic.extrafuels.handlers;
 
-import electrolitic.extrafuels.guis.containers.GuiContainerFuelRefiner;
+import electrolitic.extrafuels.guis.containers.ContainerFuelRefiner;
 import electrolitic.extrafuels.guis.screens.GuiFuelRefiner;
 import electrolitic.extrafuels.init.tile.TileEntityFuelRefiner;
 import net.minecraft.entity.player.EntityPlayer;
@@ -15,7 +15,7 @@ public class GuiHandler implements IGuiHandler{
 
     @Override
     public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-        return new GuiContainerFuelRefiner((TileEntityFuelRefiner)(world.getTileEntity(new BlockPos(x, y, z))), player.inventory);
+        return new ContainerFuelRefiner((TileEntityFuelRefiner)(world.getTileEntity(new BlockPos(x, y, z))), player.inventory);
     }
 
     @Override

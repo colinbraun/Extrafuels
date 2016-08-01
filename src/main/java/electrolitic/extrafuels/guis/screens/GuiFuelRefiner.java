@@ -1,6 +1,6 @@
 package electrolitic.extrafuels.guis.screens;
 
-import electrolitic.extrafuels.guis.containers.GuiContainerFuelRefiner;
+import electrolitic.extrafuels.guis.containers.ContainerFuelRefiner;
 import electrolitic.extrafuels.init.tile.TileEntityFuelRefiner;
 import electrolitic.extrafuels.handlers.Reference;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -18,7 +18,7 @@ public class GuiFuelRefiner extends GuiContainer {
 
     public GuiFuelRefiner(TileEntityFuelRefiner tileEntity, InventoryPlayer playerInventory)
     {
-        super(new GuiContainerFuelRefiner(tileEntity, playerInventory));
+        super(new ContainerFuelRefiner(tileEntity, playerInventory));
         this.tile = tileEntity;
     }
 
