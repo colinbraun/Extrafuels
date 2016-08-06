@@ -161,7 +161,7 @@ public class TileEntityDualSmelter extends TileEntity implements ITickable{
         itemStackHandler.insertItem(index+2, furnaceRecipes.getSmeltingResult(temp), false);
         temp.stackSize--;
         if(temp.stackSize <= 0)
-            contents[index] = null;
+            itemStackHandler.setStackInSlot(index, null);
         progress = 0;
     }
 }
