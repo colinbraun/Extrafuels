@@ -15,7 +15,7 @@ import javax.annotation.Nullable;
 /**
  * Created by Colin on 7/16/2016.
  */
-public class ContainerFuelRefiner extends Container{
+public class ContainerFuelRefiner extends ContainerBase{
 
     private TileEntityFuelRefiner tile;
     private int[] oldFields;
@@ -26,29 +26,9 @@ public class ContainerFuelRefiner extends Container{
         addSlotToContainer(new SlotItemHandler(tileEntity.itemStackHandler, 0, 56, 34));
         addSlotToContainer(new OutputSlot(tileEntity.itemStackHandler, 1, 111, 30));
 
-
         addPlayerSlotsToContainer(playerInventory);
     }
 
-
-    private void addPlayerSlotsToContainer(InventoryPlayer playerInventory)
-    {
-
-        for(int y=0; y < 3; y++)
-        {
-            for(int x = 0; x < 9; x++)
-            {
-                addSlotToContainer(new Slot(playerInventory,
-                        x + y * 9 + 9,
-                        8 + x * 18, 84 + y * 18));
-            }
-        }
-
-        for(int x = 0; x < 9; x++)
-        {
-            addSlotToContainer(new Slot(playerInventory, x, x * 18 + 8, 142));
-        }
-    }
 
 
     @Override

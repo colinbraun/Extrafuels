@@ -1,0 +1,8 @@
+{
+  "parent": "block/orientable",
+  "textures": {
+    "top": "extrafuels:blocks/fuelRefinerSide",
+    "front": "extrafuels:blocks/fuelRefiner",
+    "side": "extrafuels:blocks/fuelRefinerSide"
+  }
+}

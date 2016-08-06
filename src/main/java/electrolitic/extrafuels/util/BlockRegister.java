@@ -16,10 +16,10 @@ public class BlockRegister extends Block {
         super(material);
         setRegistryName(new ResourceLocation("extrafuels", name));
         setUnlocalizedName(name);
-        System.out.println("A block had an unlocalized name of " + getUnlocalizedName() + " and a registry name tostringed to " + getRegistryName().toString());
     }
 
     public ItemBlock createItemBlock(){
-        return  (ItemBlock)(new ItemBlock(this).setRegistryName(new ResourceLocation(Reference.MODID, "item" + this.getRegistryName().getResourcePath().substring(5))));//index 0-4 are block, so I only want the stuff after it.
+        //index 0-4 are "block", so I only want the stuff after it, hence substring.
+        return (ItemBlock)(new ItemBlock(this).setRegistryName(new ResourceLocation(Reference.MODID, "item" + this.getRegistryName().getResourcePath().substring(5))));
     }
 }

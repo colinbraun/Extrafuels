@@ -55,7 +55,7 @@ public class BlockFuelRefiner extends BlockRegister {
         if((!(tileEntity instanceof TileEntityFuelRefiner) || playerIn.isSneaking()))
             return false;
 
-        playerIn.openGui(ExtraFuels.instance, 1, worldIn, pos.getX(), pos.getY(), pos.getZ());
+        playerIn.openGui(ExtraFuels.instance, 0, worldIn, pos.getX(), pos.getY(), pos.getZ());
         return true;
     }
 
