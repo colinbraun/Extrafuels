@@ -51,8 +51,8 @@ public class TileEntityDualSmelter extends TileEntity implements ITickable{
         }
         else
         {
-            if(!TileEntityFurnace.isItemFuel(itemStackHandler.getStackInSlot(0)));
-            return;
+            if(!TileEntityFurnace.isItemFuel(itemStackHandler.getStackInSlot(0)))
+                return;
         }
 
 
@@ -84,14 +84,14 @@ public class TileEntityDualSmelter extends TileEntity implements ITickable{
         {
             if(itemStackHandler.getStackInSlot(3) == null)
                 canCraft1 = true;                                                                                                                                   //Will not produce NullPointerException b/c was checked in makesResult1
-            else if(itemStackHandler.getStackInSlot(1).getItem() == itemStackHandler.getStackInSlot(3).getItem() && itemStackHandler.getStackInSlot(3).stackSize + furnaceRecipes.getSmeltingResult(itemStackHandler.getStackInSlot(1)).stackSize <= itemStackHandler.getStackInSlot(3).getMaxStackSize())
+            else if(furnaceRecipes.getSmeltingResult(itemStackHandler.getStackInSlot(1)).getItem() == itemStackHandler.getStackInSlot(3).getItem() && itemStackHandler.getStackInSlot(3).stackSize + furnaceRecipes.getSmeltingResult(itemStackHandler.getStackInSlot(1)).stackSize <= itemStackHandler.getStackInSlot(3).getMaxStackSize())
                 canCraft1 = true;
         }
         if(makesResult2)//Determines if the item can be crafted as long as it makes a result
         {
             if(itemStackHandler.getStackInSlot(4) == null)
                 canCraft2 = true;                                                                                                                                   //Will not produce NullPointerException b/c was checked in makesResult2
-            else if(itemStackHandler.getStackInSlot(2).getItem() == itemStackHandler.getStackInSlot(4).getItem() && itemStackHandler.getStackInSlot(4).stackSize + furnaceRecipes.getSmeltingResult(itemStackHandler.getStackInSlot(2)).stackSize <= itemStackHandler.getStackInSlot(4).getMaxStackSize())
+            else if(furnaceRecipes.getSmeltingResult(itemStackHandler.getStackInSlot(2)).getItem() == itemStackHandler.getStackInSlot(4).getItem() && itemStackHandler.getStackInSlot(4).stackSize + furnaceRecipes.getSmeltingResult(itemStackHandler.getStackInSlot(2)).stackSize <= itemStackHandler.getStackInSlot(4).getMaxStackSize())
                 canCraft2 = true;
         }
         if(!canCraft1  && !canCraft2) {
@@ -157,7 +157,11 @@ public class TileEntityDualSmelter extends TileEntity implements ITickable{
 
     public void craft(int index)//Should only accept one of the 2 input indexes
     {
-            itemStackHandler.insertItem(index+2, furnaceRecipes.getSmeltingResult(itemStackHandler.getStackInSlot(index)), false);
-            itemStackHandler.getStackInSlot(index).stackSize--;
+        ItemStack temp = itemStackHandler.getStackInSlot(index);
+        itemStackHandler.insertItem(index+2, furnaceRecipes.getSmeltingResult(temp), false);
+        temp.stackSize--;
+        if(temp.stackSize <= 0)
+            temp = null;
+        progress = 0;
     }
 }
