@@ -31,6 +31,4 @@ public class GuiFuelRefiner extends GuiContainer {
         if(tile.isRunning())
             drawTexturedModalRect(guiLeft + 80, guiTop + 38, 176, 18, (int)(23 * (double)tile.getProgress()/tile.getProcessTime()), 6); //Draws the progress bar
     }
-
-
 }

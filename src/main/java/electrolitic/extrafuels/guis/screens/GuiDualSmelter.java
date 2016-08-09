@@ -27,6 +27,11 @@ public class GuiDualSmelter extends GuiContainer {
         GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
 
         mc.renderEngine.bindTexture(dualSmelterTexture);
-        drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
+        drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);//Draws the Gui
+        if(tile.isBurning())
+        {
+            int distance = (int)((double)tile.getBurnTime()/tile.getItemTotalBurnTime()*14);
+            drawTexturedModalRect(guiLeft + 49, guiTop + 42 + 14 - distance, 177, 0 + 14 - distance, 14, distance);//Draws the burnTime bar
+        }
     }
 }

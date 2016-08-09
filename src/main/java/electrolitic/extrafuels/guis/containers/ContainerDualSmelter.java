@@ -21,7 +21,7 @@ public class ContainerDualSmelter extends ContainerBase {
     public ContainerDualSmelter(TileEntityDualSmelter tileEntity, InventoryPlayer playerInventory)
     {
         tile = tileEntity;
-        oldFields = tile.getFields();
+        oldFields = tileEntity.getFields();
         addSlotToContainer(new SlotItemHandler(tile.itemStackHandler, 0, 47, 60));
         addSlotToContainer(new SlotItemHandler(tile.itemStackHandler, 1, 39, 20));
         addSlotToContainer(new SlotItemHandler(tile.itemStackHandler, 2, 56, 20));
@@ -60,7 +60,7 @@ public class ContainerDualSmelter extends ContainerBase {
                 IContainerListener listener = listeners.get(i);
                 for(int k = 0; k < fields.length; ++k)
                 {
-                    listener.sendProgressBarUpdate(this, i, fields[i]);
+                    listener.sendProgressBarUpdate(this, k, fields[k]);
                 }
             }
         }

@@ -1,8 +1,6 @@
 package electrolitic.extrafuels.init.tile;
 
 import com.sun.media.jfxmedia.logging.Logger;
-import electrolitic.extrafuels.init.items.ItemRefinedCoal;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
@@ -18,7 +16,7 @@ public class TileEntityDualSmelter extends TileEntity implements ITickable{
 
     //The amount of time the item has been cooking for
     private int progress;
-    //The amount of time it takes to cook the item in the furncae
+    //The amount of time it takes to cook the item in the furnace
     private int totalCookTime;
     //The amount of burn time left in the furnace
     private int burnTime;
@@ -104,7 +102,7 @@ public class TileEntityDualSmelter extends TileEntity implements ITickable{
             itemTotalBurnTime = TileEntityFurnace.getItemBurnTime(itemStackHandler.getStackInSlot(0));
             burnTime = itemTotalBurnTime;
             if(--itemStackHandler.getStackInSlot(0).stackSize <= 0)
-                contents[0] = null;
+                itemStackHandler.setStackInSlot(0, null);
             burnTime--;
         }
 
@@ -149,7 +147,6 @@ public class TileEntityDualSmelter extends TileEntity implements ITickable{
             default: Logger.logMsg(3, "Tried to set a field that does not exist...");
         }
     }
-
     public boolean isBurning()
     {
         return burnTime > 0;
@@ -158,10 +155,30 @@ public class TileEntityDualSmelter extends TileEntity implements ITickable{
     public void craft(int index)//Should only accept one of the 2 input indexes
     {
         ItemStack temp = itemStackHandler.getStackInSlot(index);
-        itemStackHandler.insertItem(index+2, furnaceRecipes.getSmeltingResult(temp), false);
+        itemStackHandler.insertItem(index+2, furnaceRecipes.getSmeltingResult(temp).copy(), false);
         temp.stackSize--;
         if(temp.stackSize <= 0)
             itemStackHandler.setStackInSlot(index, null);
         progress = 0;
+    }
+
+    public int getProgress()
+    {
+        return progress;
+    }
+
+    public int getTotalCookTime()
+    {
+        return totalCookTime;
+    }
+
+    public int getBurnTime()
+    {
+        return burnTime;
+    }
+
+    public int getItemTotalBurnTime()
+    {
+        return itemTotalBurnTime;
     }
 }
